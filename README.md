@@ -76,12 +76,21 @@ Set `Content-Type: text/html` and send:
 ```html
 <h1>Hello PDF!</h1>
 ```
+#### Sample Request 
+```html
+<pre> POST /generate-pdf HTTP/1.1 Host: localhost:3000 Content-Type: application/json x-api-key: your-api-key </pre>
 
+{
+  "html": "<h1>Hello, PDF!</h1><p>This is a test paragraph rendered into PDF.</p>"
+}
+```
 #### Response:
-
-* A downloadable PDF (Content-Type: `application/pdf`)
-
+```html
+ <pre> HTTP/1.1 200 OK Content-Type: application/pdf Content-Disposition: inline </pre> 
+ ```
 ---
+
+
 
 ## Security
 
