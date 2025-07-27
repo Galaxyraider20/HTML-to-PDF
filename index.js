@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const wkhtmltopdf = require('wkhtmltopdf');
 
@@ -9,7 +10,12 @@ app.use((req, res, next) => {
   next(); // pass control to the next middleware/route
 });
 
-const API_KEY = process.env.API_KEY || 's}yb^A217@#6ygNQO,|~S876';
+const API_KEY = process.env.API_KEY;
+
+if (!API_KEY) {
+  throw new Error('❌ Missing API_KEY in environment variables');
+}
+
 
 app.use((req, res, next) => {
   const sentKey = req.headers['x-api-key'];
@@ -46,7 +52,11 @@ app.post('/generate-pdf', (req, res) => {
     .pipe(res);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+if (!PORT) {
+  throw new Error('❌ Missing PORT in environment variables');
+}
+
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
